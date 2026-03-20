@@ -23,7 +23,6 @@ function useCountUp(target: number, duration = 2000) {
     const step = (now: number) => {
       const elapsed = now - start;
       const progress = Math.min(elapsed / duration, 1);
-      // ease-out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.round(eased * target));
 
@@ -57,7 +56,7 @@ function useCountUp(target: number, duration = 2000) {
 }
 
 // ---------------------------------------------------------------------------
-// Single stat block
+// Stat blocks — glass mini-cards with glow
 // ---------------------------------------------------------------------------
 
 function StatBlock({ stat }: { stat: Stat }) {
@@ -67,11 +66,11 @@ function StatBlock({ stat }: { stat: Stat }) {
   }
 
   return (
-    <div>
-      <p className="font-display text-4xl font-bold text-accent-primary md:text-5xl">
+    <div className="rounded-xl border border-border-medium bg-bg-card backdrop-blur-sm p-5 text-center transition-all duration-300 hover:border-border-strong hover:shadow-[0_0_20px_rgba(59,130,246,0.06)]">
+      <p className="font-display text-3xl font-bold text-accent-primary text-glow md:text-4xl">
         {stat.value}
       </p>
-      <p className="mt-2 font-body text-sm text-text-secondary">{stat.label}</p>
+      <p className="mt-2 font-body text-xs text-text-secondary">{stat.label}</p>
     </div>
   );
 }
@@ -88,18 +87,18 @@ function NumericStat({
   const { count, ref } = useCountUp(target);
 
   return (
-    <div>
-      <p className="font-display text-4xl font-bold text-accent-primary md:text-5xl">
+    <div className="rounded-xl border border-border-medium bg-bg-card backdrop-blur-sm p-5 text-center transition-all duration-300 hover:border-border-strong hover:shadow-[0_0_20px_rgba(59,130,246,0.06)]">
+      <p className="font-display text-3xl font-bold text-accent-primary text-glow md:text-4xl">
         <span ref={ref}>{count}</span>
         {suffix && <span>{suffix}</span>}
       </p>
-      <p className="mt-2 font-body text-sm text-text-secondary">{label}</p>
+      <p className="mt-2 font-body text-xs text-text-secondary">{label}</p>
     </div>
   );
 }
 
 // ---------------------------------------------------------------------------
-// Animation variants
+// Animation
 // ---------------------------------------------------------------------------
 
 const fadeUp = {
@@ -112,13 +111,26 @@ const fadeUp = {
 };
 
 // ---------------------------------------------------------------------------
-// Component
+// WhyZenith — split layout with glass stat cards
 // ---------------------------------------------------------------------------
 
 export function WhyZenith() {
   return (
-    <section id="about" className="bg-bg-primary py-24">
-      <div className="mx-auto flex max-w-7xl flex-col gap-16 px-6 lg:flex-row">
+    <section id="about" className="relative bg-bg-primary py-28 overflow-hidden">
+      {/* Grid overlay */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 grid-overlay opacity-30" />
+
+      {/* Radial glow */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 50% 50% at 80% 50%, rgba(6,182,212,0.04) 0%, transparent 70%)",
+        }}
+      />
+
+      <div className="relative z-10 mx-auto flex max-w-7xl flex-col gap-16 px-6 lg:flex-row">
         {/* LEFT SIDE */}
         <motion.div
           className="lg:w-3/5"
@@ -127,9 +139,12 @@ export function WhyZenith() {
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
         >
-          <p className="mb-4 text-xs uppercase tracking-[0.2em] text-accent-primary font-body">
-            Why Zenith Digital
-          </p>
+          <div className="mb-4 flex items-center gap-3">
+            <span className="h-px w-8 bg-accent-primary/40" />
+            <span className="text-xs uppercase tracking-[0.2em] text-accent-primary font-body">
+              Why Zenith Digital
+            </span>
+          </div>
           <h2 className="mb-6 font-display text-3xl font-semibold text-text-primary md:text-5xl whitespace-pre-line">
             {"Hong Kong is where\nEast meets intelligence."}
           </h2>
@@ -151,9 +166,7 @@ export function WhyZenith() {
           <ul className="space-y-4">
             {WHY_ZENITH_POINTS.map((point) => (
               <li key={point} className="flex items-start gap-3">
-                <span className="mt-0.5 text-accent-primary" aria-hidden="true">
-                  &#9670;
-                </span>
+                <span className="mt-1.5 inline-flex h-2 w-2 flex-shrink-0 rounded-full bg-accent-primary shadow-[0_0_8px_rgba(59,130,246,0.5)]" aria-hidden="true" />
                 <span className="font-body text-base text-text-primary">
                   {point}
                 </span>
@@ -162,7 +175,7 @@ export function WhyZenith() {
           </ul>
         </motion.div>
 
-        {/* RIGHT SIDE */}
+        {/* RIGHT SIDE — Stat cards */}
         <motion.div
           className="lg:w-2/5"
           variants={fadeUp}
@@ -171,7 +184,7 @@ export function WhyZenith() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ delay: 0.2 }}
         >
-          <div className="grid grid-cols-2 gap-8">
+          <div className="grid grid-cols-2 gap-4">
             {STATS.map((stat) => (
               <StatBlock key={stat.label} stat={stat} />
             ))}

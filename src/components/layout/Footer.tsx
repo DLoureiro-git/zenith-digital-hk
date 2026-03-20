@@ -19,19 +19,19 @@ function FooterColumn({
 }) {
   return (
     <div>
-      <h4 className="font-body text-sm uppercase tracking-wider text-text-primary mb-4">
+      <h4 className="font-body text-[11px] uppercase tracking-widest text-text-primary mb-5">
         {heading}
       </h4>
-      <ul className="space-y-2">
+      <ul className="space-y-3">
         {links.map((link) => (
           <li key={link.label}>
             <a
               href={link.href}
-              className="text-sm font-body text-text-secondary hover:text-accent-primary transition inline-flex items-center gap-2"
+              className="text-sm font-body text-text-secondary hover:text-accent-primary transition-colors duration-300 inline-flex items-center gap-2"
             >
               {link.label}
               {link.badge && (
-                <span className="text-[10px] uppercase tracking-wider border border-border-subtle text-text-tertiary rounded px-1.5 py-0.5 leading-none">
+                <span className="text-[9px] uppercase tracking-wider border border-border-medium text-text-tertiary rounded-full px-2 py-0.5 leading-none">
                   {link.badge}
                 </span>
               )}
@@ -44,15 +44,15 @@ function FooterColumn({
 }
 
 // ---------------------------------------------------------------------------
-// Social icons (inline SVG, 20 x 20)
+// Social icons (inline SVG, 18 x 18)
 // ---------------------------------------------------------------------------
 
 function LinkedInIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
+      width="18"
+      height="18"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -71,8 +71,8 @@ function XIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
+      width="18"
+      height="18"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -90,8 +90,8 @@ function GitHubIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
+      width="18"
+      height="18"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -106,22 +106,31 @@ function GitHubIcon() {
 }
 
 // ---------------------------------------------------------------------------
-// Footer
+// Footer — deep navy with subtle glow separators
 // ---------------------------------------------------------------------------
 
 export function Footer() {
   return (
-    <footer className="bg-bg-secondary border-t border-border-subtle">
+    <footer className="relative bg-bg-primary border-t border-border-medium">
+      {/* Top glow line */}
+      <div
+        aria-hidden="true"
+        className="absolute top-0 left-0 right-0 h-px"
+        style={{
+          background: "linear-gradient(90deg, transparent, rgba(59,130,246,0.15), rgba(6,182,212,0.1), transparent)",
+        }}
+      />
+
       <div className="mx-auto max-w-7xl px-6 py-16">
         {/* ---- Grid ---- */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Col 1 — Brand */}
           <div>
-            <a href="#" className="flex items-baseline gap-1.5 select-none">
-              <span className="font-display italic text-xl text-text-primary">
+            <a href="#" className="group flex items-baseline gap-1.5 select-none">
+              <span className="font-display italic text-xl text-text-primary transition-all group-hover:text-glow">
                 ZENITH
               </span>
-              <span className="font-body text-accent-primary uppercase tracking-[0.2em] text-xs">
+              <span className="font-body text-accent-primary uppercase tracking-[0.2em] text-[10px]">
                 DIGITAL HK
               </span>
             </a>
@@ -133,29 +142,29 @@ export function Footer() {
             {/* Social icons */}
             <div className="mt-5 flex items-center gap-4">
               <a
-                href="https://linkedin.com"
+                href={SITE.social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="text-text-secondary hover:text-accent-primary transition"
+                className="text-text-tertiary hover:text-accent-primary transition-colors duration-300"
               >
                 <LinkedInIcon />
               </a>
               <a
-                href="https://x.com"
+                href={SITE.social.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="X / Twitter"
-                className="text-text-secondary hover:text-accent-primary transition"
+                className="text-text-tertiary hover:text-accent-primary transition-colors duration-300"
               >
                 <XIcon />
               </a>
               <a
-                href="https://github.com"
+                href={SITE.social.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                className="text-text-secondary hover:text-accent-primary transition"
+                className="text-text-tertiary hover:text-accent-primary transition-colors duration-300"
               >
                 <GitHubIcon />
               </a>

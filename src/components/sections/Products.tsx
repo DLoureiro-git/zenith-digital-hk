@@ -24,13 +24,23 @@ const cardVariants = {
 };
 
 // ---------------------------------------------------------------------------
-// Component
+// Products — glass cards with colored glow accents
 // ---------------------------------------------------------------------------
 
 export function Products() {
   return (
-    <section id="products" className="bg-bg-tertiary py-24">
-      <div className="mx-auto max-w-7xl px-6">
+    <section id="products" className="relative bg-bg-secondary py-28 overflow-hidden">
+      {/* Subtle radial glow */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 40% at 50% 0%, rgba(59,130,246,0.04) 0%, transparent 70%)",
+        }}
+      />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
         {/* Header */}
         <motion.div
           className="mb-16 text-center"
@@ -39,9 +49,13 @@ export function Products() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
         >
-          <p className="mb-4 text-xs uppercase tracking-[0.2em] text-accent-primary font-body">
-            Our Platforms
-          </p>
+          <div className="mb-4 flex items-center justify-center gap-3">
+            <span className="h-px w-8 bg-accent-secondary/40" />
+            <span className="text-xs uppercase tracking-[0.2em] text-accent-secondary font-body">
+              Our Platforms
+            </span>
+            <span className="h-px w-8 bg-accent-secondary/40" />
+          </div>
           <h2 className="mb-6 font-display text-3xl font-semibold text-text-primary md:text-5xl whitespace-pre-line">
             {"Built in-house.\nDeployed in markets."}
           </h2>
@@ -63,37 +77,52 @@ export function Products() {
             <motion.div
               key={product.name}
               variants={cardVariants}
-              className="group overflow-hidden rounded-xl border border-border-subtle bg-bg-secondary transition-all duration-300 hover:border-[var(--card-accent)]"
+              className="group relative overflow-hidden rounded-2xl border border-border-medium bg-bg-card backdrop-blur-sm transition-all duration-500 hover:-translate-y-1"
               style={
                 { "--card-accent": product.accentColor } as React.CSSProperties
               }
             >
-              {/* Accent bar */}
+              {/* Top glow accent bar */}
               <div
-                className="h-[3px] w-full"
-                style={{ background: product.accentColor }}
+                className="h-px w-full"
+                style={{
+                  background: `linear-gradient(90deg, transparent, ${product.accentColor}, transparent)`,
+                }}
+              />
+
+              {/* Hover glow overlay */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                style={{
+                  background: `radial-gradient(ellipse 80% 50% at 50% 0%, ${product.accentColor}10 0%, transparent 70%)`,
+                }}
               />
 
               {/* Content */}
-              <div className="p-8">
+              <div className="relative p-8">
                 {/* Tag + Status */}
                 <div className="flex items-center justify-between">
-                  <span className="text-xs uppercase tracking-wider text-text-tertiary font-body">
+                  <span className="text-[11px] uppercase tracking-wider text-text-tertiary font-body">
                     {product.tag}
                   </span>
                   {product.status === "Live" ? (
-                    <span className="rounded-full bg-green-500/10 px-2 py-0.5 text-xs text-green-400">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-medium text-emerald-400">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
                       Live
                     </span>
                   ) : (
-                    <span className="rounded-full bg-amber-500/10 px-2 py-0.5 text-xs text-amber-400">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-primary/10 px-2.5 py-0.5 text-[10px] font-medium text-accent-primary">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent-primary" />
                       {product.status}
                     </span>
                   )}
                 </div>
 
                 {/* Name + Tagline */}
-                <h3 className="mt-4 mb-2 font-display text-2xl font-bold text-text-primary md:text-3xl">
+                <h3
+                  className="mt-5 mb-2 font-display text-2xl font-bold text-text-primary md:text-3xl"
+                >
                   {product.name}
                 </h3>
                 <p className="mb-4 font-body text-sm italic text-text-secondary">
@@ -101,18 +130,24 @@ export function Products() {
                 </p>
 
                 {/* Description */}
-                <p className="mb-6 font-body text-sm leading-relaxed text-text-tertiary">
+                <p className="mb-8 font-body text-sm leading-relaxed text-text-tertiary">
                   {product.description}
                 </p>
 
-                {/* Metrics */}
-                <div className="mb-6 grid grid-cols-3 gap-4">
+                {/* Metrics — glass mini-cards */}
+                <div className="mb-8 grid grid-cols-3 gap-3">
                   {product.metrics.map((metric) => (
-                    <div key={metric.label}>
-                      <p className="font-display text-xl font-bold text-accent-primary">
+                    <div
+                      key={metric.label}
+                      className="rounded-lg bg-[rgba(59,130,246,0.04)] border border-border-subtle p-3 text-center"
+                    >
+                      <p
+                        className="font-display text-lg font-bold"
+                        style={{ color: product.accentColor }}
+                      >
                         {metric.value}
                       </p>
-                      <p className="mt-1 text-xs text-text-tertiary font-body">
+                      <p className="mt-1 text-[10px] text-text-tertiary font-body leading-tight">
                         {metric.label}
                       </p>
                     </div>
@@ -122,10 +157,11 @@ export function Products() {
                 {/* CTA */}
                 <a
                   href="#products"
-                  className="font-body text-sm font-semibold hover:underline"
+                  className="inline-flex items-center gap-2 font-body text-sm font-semibold transition-all duration-300 hover:gap-3"
                   style={{ color: product.accentColor }}
                 >
-                  Explore&nbsp;&rarr;
+                  Explore
+                  <span>&rarr;</span>
                 </a>
               </div>
             </motion.div>

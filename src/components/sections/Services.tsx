@@ -5,7 +5,7 @@ import { SERVICES } from "@/lib/constants";
 import type { Service } from "@/lib/constants";
 
 // ---------------------------------------------------------------------------
-// Inline SVG icons (Lucide-style, 32px, stroke-only)
+// Inline SVG icons (32px, stroke-only, blue glow)
 // ---------------------------------------------------------------------------
 
 const ServiceIcon = ({ icon }: { icon: Service["icon"] }) => {
@@ -18,7 +18,7 @@ const ServiceIcon = ({ icon }: { icon: Service["icon"] }) => {
     strokeWidth: 1.5,
     strokeLinecap: "round" as const,
     strokeLinejoin: "round" as const,
-    className: "text-accent-primary",
+    className: "text-accent-primary drop-shadow-[0_0_8px_rgba(59,130,246,0.4)]",
   };
 
   switch (icon) {
@@ -98,13 +98,16 @@ const cardVariants = {
 };
 
 // ---------------------------------------------------------------------------
-// Component
+// Services — glass cards with glow borders on hover
 // ---------------------------------------------------------------------------
 
 export function Services() {
   return (
-    <section id="services" className="bg-bg-primary py-24">
-      <div className="mx-auto max-w-7xl px-6">
+    <section id="services" className="relative bg-bg-primary py-28 overflow-hidden">
+      {/* Background grid */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 grid-overlay opacity-40" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
         {/* Header */}
         <motion.div
           className="mb-16 text-center"
@@ -113,9 +116,13 @@ export function Services() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
         >
-          <p className="mb-4 text-xs uppercase tracking-[0.2em] text-accent-primary font-body">
-            What We Do
-          </p>
+          <div className="mb-4 flex items-center justify-center gap-3">
+            <span className="h-px w-8 bg-accent-primary/40" />
+            <span className="text-xs uppercase tracking-[0.2em] text-accent-primary font-body">
+              What We Do
+            </span>
+            <span className="h-px w-8 bg-accent-primary/40" />
+          </div>
           <h2 className="mb-6 font-display text-3xl font-semibold text-text-primary md:text-5xl whitespace-pre-line">
             {"AI built for\nenterprise reality."}
           </h2>
@@ -125,7 +132,7 @@ export function Services() {
           </p>
         </motion.div>
 
-        {/* Card grid — 3 cols first row, 2 cols centered second row */}
+        {/* Card grid */}
         <motion.div
           className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
           variants={containerVariants}
@@ -133,25 +140,25 @@ export function Services() {
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
         >
-          {SERVICES.map((service, i) => (
+          {SERVICES.map((service) => (
             <motion.div
               key={service.number}
               variants={cardVariants}
-              className={`rounded-xl border border-border-subtle bg-bg-secondary p-8 transition-all duration-300 hover:-translate-y-1 hover:border-border-strong ${
-                i >= 3 ? "md:col-span-1 lg:col-start-auto" : ""
-              }`}
-              style={
-                i === 3
-                  ? { gridColumn: undefined }
-                  : undefined
-              }
+              className="group relative rounded-2xl border border-border-medium bg-bg-card p-8 backdrop-blur-sm transition-all duration-500 hover:border-border-glow hover:shadow-[0_0_40px_rgba(59,130,246,0.08)] hover:-translate-y-1"
             >
-              <span className="mb-4 block font-body text-sm font-semibold text-accent-primary">
+              {/* Gradient border on hover */}
+              <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100 border-gradient" />
+
+              {/* Number */}
+              <span className="mb-4 block font-body text-[11px] font-semibold tracking-widest text-accent-primary/60">
                 {service.number}
               </span>
-              <div className="mb-4">
+
+              {/* Icon with glow background */}
+              <div className="mb-5 inline-flex items-center justify-center rounded-xl bg-accent-primary/5 p-3">
                 <ServiceIcon icon={service.icon} />
               </div>
+
               <h3 className="mb-3 font-body text-xl font-semibold text-text-primary">
                 {service.title}
               </h3>
@@ -161,8 +168,6 @@ export function Services() {
             </motion.div>
           ))}
         </motion.div>
-
-        {/* Centered last 2 cards on large screens using a second row wrapper */}
       </div>
     </section>
   );

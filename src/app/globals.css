@@ -1,40 +1,64 @@
 @import "tailwindcss";
 
+/* ================================================================
+   ZENITH DIGITAL HK — Design System v2
+   Inspired by: Lincoln Zephyr HMI + BlockDB DeFi Data
+   Theme: Deep navy, electric blue, cosmic atmosphere
+   ================================================================ */
+
 :root {
-  --bg-primary: #090909;
-  --bg-secondary: #0F0F0F;
-  --bg-tertiary: #141414;
-  --accent-primary: #C8A96E;
-  --accent-secondary: #3B82F6;
-  --accent-glow: rgba(200, 169, 110, 0.12);
-  --text-primary: #F0EDE6;
-  --text-secondary: #8A8580;
-  --text-tertiary: #4A4744;
-  --border-subtle: rgba(240, 237, 230, 0.06);
-  --border-medium: rgba(240, 237, 230, 0.12);
-  --border-strong: rgba(200, 169, 110, 0.2);
+  /* Backgrounds — deep navy layers */
+  --bg-primary: #050a18;
+  --bg-secondary: #0a1128;
+  --bg-tertiary: #0f1a3a;
+  --bg-card: rgba(15, 26, 58, 0.6);
+
+  /* Accents — electric blue + cyan */
+  --accent-primary: #3B82F6;
+  --accent-secondary: #06B6D4;
+  --accent-glow: rgba(59, 130, 246, 0.12);
+  --accent-glow-strong: rgba(59, 130, 246, 0.25);
+
+  /* Text — blue-tinted whites */
+  --text-primary: #E8EDFB;
+  --text-secondary: #8B9CC7;
+  --text-tertiary: #3D4F7C;
+
+  /* Borders — blue-tinted */
+  --border-subtle: rgba(59, 130, 246, 0.06);
+  --border-medium: rgba(59, 130, 246, 0.12);
+  --border-strong: rgba(59, 130, 246, 0.25);
+  --border-glow: rgba(59, 130, 246, 0.4);
 }
 
 @theme inline {
   --color-bg-primary: var(--bg-primary);
   --color-bg-secondary: var(--bg-secondary);
   --color-bg-tertiary: var(--bg-tertiary);
+  --color-bg-card: var(--bg-card);
   --color-accent-primary: var(--accent-primary);
   --color-accent-secondary: var(--accent-secondary);
   --color-accent-glow: var(--accent-glow);
+  --color-accent-glow-strong: var(--accent-glow-strong);
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-text-tertiary: var(--text-tertiary);
   --color-border-subtle: var(--border-subtle);
   --color-border-medium: var(--border-medium);
   --color-border-strong: var(--border-strong);
+  --color-border-glow: var(--border-glow);
   --font-display: var(--font-playfair);
   --font-body: var(--font-dm-sans);
   --animate-marquee: marquee 40s linear infinite;
   --animate-marquee-reverse: marquee-reverse 40s linear infinite;
   --animate-slow-spin: slow-spin 60s linear infinite;
-  --animate-fade-in: fade-in 0.4s ease-out;
+  --animate-fade-in: fade-in 0.6s ease-out;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 4s ease-in-out infinite;
+  --animate-grid-scroll: grid-scroll 20s linear infinite;
 }
+
+/* ---- Keyframes ---- */
 
 @keyframes marquee {
   0% { transform: translateX(0); }
@@ -52,11 +76,39 @@
 }
 
 @keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Global styles */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes grid-scroll {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-80px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes streak {
+  0% { transform: translateX(-100%) translateY(100%) rotate(-35deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateX(200%) translateY(-200%) rotate(-35deg); opacity: 0; }
+}
+
+/* ---- Global styles ---- */
+
 html {
   scroll-behavior: smooth;
 }
@@ -69,28 +121,31 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom scrollbar */
+/* ---- Custom scrollbar ---- */
+
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
 }
 ::-webkit-scrollbar-track {
   background: var(--bg-primary);
 }
 ::-webkit-scrollbar-thumb {
   background: var(--accent-primary);
-  border-radius: 3px;
+  border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #D4B97A;
+  background: var(--accent-secondary);
 }
 
-/* Selection */
+/* ---- Selection ---- */
+
 ::selection {
   background: var(--accent-primary);
-  color: #000;
+  color: #fff;
 }
 
-/* Skip navigation */
+/* ---- Skip navigation ---- */
+
 .skip-nav {
   position: absolute;
   top: -100%;
@@ -98,8 +153,116 @@ body {
   z-index: 100;
   padding: 1rem;
   background: var(--accent-primary);
-  color: #000;
+  color: #fff;
 }
 .skip-nav:focus {
   top: 0;
+}
+
+/* ---- Glass morphism utility ---- */
+
+.glass {
+  background: rgba(10, 17, 40, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-medium);
+}
+
+.glass-strong {
+  background: rgba(10, 17, 40, 0.8);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid var(--border-strong);
+}
+
+/* ---- Glow utilities ---- */
+
+.glow-blue {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.15),
+              0 0 60px rgba(59, 130, 246, 0.05);
+}
+
+.glow-blue-strong {
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.25),
+              0 0 80px rgba(59, 130, 246, 0.1),
+              inset 0 0 30px rgba(59, 130, 246, 0.05);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.15),
+              0 0 60px rgba(6, 182, 212, 0.05);
+}
+
+.text-glow {
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.5),
+               0 0 40px rgba(59, 130, 246, 0.2);
+}
+
+.text-glow-cyan {
+  text-shadow: 0 0 20px rgba(6, 182, 212, 0.5),
+               0 0 40px rgba(6, 182, 212, 0.2);
+}
+
+/* ---- Grid overlay pattern ---- */
+
+.grid-overlay {
+  background-image:
+    linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* ---- Noise texture overlay ---- */
+
+.noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.015;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px;
+}
+
+/* ---- Animated gradient border ---- */
+
+.border-gradient {
+  position: relative;
+}
+.border-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.4),
+    rgba(6, 182, 212, 0.2),
+    transparent,
+    rgba(59, 130, 246, 0.2)
+  );
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+}
+
+/* ---- Light streak effect ---- */
+
+.light-streak {
+  position: absolute;
+  width: 1px;
+  height: 200%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(59, 130, 246, 0.3),
+    rgba(6, 182, 212, 0.1),
+    transparent
+  );
+  transform: rotate(-35deg);
+  pointer-events: none;
 }

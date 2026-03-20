@@ -92,7 +92,7 @@ export const PRODUCTS: Product[] = [
       { value: "Excel", label: "Validation gateway" },
       { value: "ROI", label: "Structured scoring" },
     ],
-    accentColor: "#C8A96E",
+    accentColor: "#06B6D4",
     status: "Beta",
   },
   {
@@ -105,7 +105,7 @@ export const PRODUCTS: Product[] = [
       { value: "PT", label: "Import compliance" },
       { value: "\u2726", label: "White-glove experience" },
     ],
-    accentColor: "#DC2626",
+    accentColor: "#8B5CF6",
     status: "Live",
   },
 ];

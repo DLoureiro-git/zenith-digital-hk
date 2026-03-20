@@ -17,37 +17,61 @@ const fadeUp = {
 };
 
 // ---------------------------------------------------------------------------
-// CtaBand
+// CtaBand — deep navy with radial glow + glass CTA
 // ---------------------------------------------------------------------------
 
 export function CtaBand() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden bg-bg-secondary py-24"
+      className="relative overflow-hidden bg-bg-secondary py-28"
     >
-      {/* ---- Gold gradient overlay ---- */}
+      {/* ---- Radial blue glow ---- */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "linear-gradient(90deg, rgba(200,169,110,0.08) 0%, rgba(200,169,110,0.04) 40%, transparent 100%)",
+            "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(59,130,246,0.06) 0%, transparent 70%)",
         }}
       />
 
+      {/* ---- Grid overlay ---- */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 grid-overlay opacity-20" />
+
+      {/* ---- Orbital ring ---- */}
+      <svg
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] animate-slow-spin opacity-30"
+        viewBox="0 0 600 600"
+      >
+        <circle
+          cx="300"
+          cy="300"
+          r="280"
+          fill="none"
+          stroke="rgba(59,130,246,0.08)"
+          strokeWidth="1"
+          strokeDasharray="4 12"
+        />
+      </svg>
+
       {/* ---- Content ---- */}
       <div className="relative z-10 mx-auto max-w-2xl px-6 text-center">
-        <motion.p
+        <motion.div
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.6 }}
           custom={0}
-          className="mb-4 font-body text-xs uppercase tracking-[0.2em] text-accent-primary"
+          className="mb-4 flex items-center justify-center gap-3"
         >
-          Get in Touch
-        </motion.p>
+          <span className="h-px w-8 bg-accent-secondary/40" />
+          <span className="font-body text-xs uppercase tracking-[0.2em] text-accent-secondary">
+            Get in Touch
+          </span>
+          <span className="h-px w-8 bg-accent-secondary/40" />
+        </motion.div>
 
         <motion.h2
           variants={fadeUp}
@@ -81,7 +105,7 @@ export function CtaBand() {
         >
           <a
             href={`mailto:${SITE.email}`}
-            className="inline-block bg-accent-primary px-10 py-4 font-body text-lg font-semibold text-black transition-transform hover:scale-[1.02]"
+            className="relative inline-block rounded-full bg-accent-primary px-10 py-4 font-body text-lg font-semibold text-[#050a18] transition-all duration-300 hover:shadow-[0_0_40px_rgba(59,130,246,0.5)] hover:scale-[1.02]"
           >
             Book a Strategy Call&nbsp;&rarr;
           </a>
@@ -96,7 +120,7 @@ export function CtaBand() {
         >
           <a
             href={`mailto:${SITE.email}`}
-            className="mt-6 inline-block font-body text-text-secondary transition hover:underline"
+            className="mt-6 inline-block font-body text-text-secondary transition hover:text-accent-primary"
           >
             {SITE.email}
           </a>
