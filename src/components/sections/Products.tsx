@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { PRODUCTS } from "@/lib/constants";
+import Link from "next/link";
 
 // ---------------------------------------------------------------------------
 // Animation variants
@@ -155,14 +156,14 @@ export function Products() {
                 </div>
 
                 {/* CTA */}
-                <a
-                  href="#products"
+                <Link
+                  href="/portfolio"
                   className="inline-flex items-center gap-2 font-body text-sm font-semibold transition-all duration-300 hover:gap-3"
                   style={{ color: product.accentColor }}
                 >
                   Explore
                   <span>&rarr;</span>
-                </a>
+                </Link>
               </div>
             </motion.div>
           ))}
