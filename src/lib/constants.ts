@@ -51,6 +51,12 @@ export const SERVICES: Service[] = [
     title: "Enterprise AI Training",
     body: "Practical, hands-on programmes that build AI fluency across your teams — from C-suite to operations.",
   },
+  {
+    number: "06",
+    icon: "shield-check",
+    title: "AI Governance & Compliance",
+    body: "Enterprise-grade frameworks for responsible AI deployment — risk assessment, audit trails, and regulatory alignment across APAC jurisdictions.",
+  },
 ];
 
 export interface ProductMetric {

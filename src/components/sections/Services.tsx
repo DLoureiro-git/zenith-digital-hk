@@ -72,6 +72,13 @@ const ServiceIcon = ({ icon }: { icon: Service["icon"] }) => {
           <path d="M22 20c0-2.21-1.79-4-4-4-.82 0-1.58.25-2.21.67" />
         </svg>
       );
+    case "shield-check":
+      return (
+        <svg {...common}>
+          <path d="M12 2l7 4v5c0 5.25-3.5 8.75-7 10-3.5-1.25-7-4.75-7-10V6l7-4z" />
+          <path d="M9 12l2 2 4-4" />
+        </svg>
+      );
     default:
       return null;
   }
