@@ -10,6 +10,7 @@ import { TEAM_MEMBERS } from "@/lib/constants/team";
 import { EVENTS } from "@/lib/constants/events";
 import { TESTIMONIALS } from "@/lib/constants/testimonials";
 import { createMetadata } from "@/lib/utils/metadata";
+import Image from "next/image";
 
 export const metadata = createMetadata({
   title: "About",
@@ -44,6 +45,21 @@ export default function AboutPage() {
             production, generate measurable ROI, and compound in value over
             time.
           </p>
+
+          {/* HK skyline image */}
+          <div className="mt-10 relative aspect-[21/9] w-full overflow-hidden rounded-2xl border border-border-medium">
+            <Image
+              src="/images/about/hk-skyline.jpg"
+              alt="Hong Kong skyline"
+              fill
+              className="object-cover"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#050a18]/80 to-transparent" />
+            <div className="absolute bottom-6 left-6">
+              <span className="font-body text-sm text-text-secondary">Hong Kong · Our Home Base</span>
+            </div>
+          </div>
         </div>
       </Section>
 
@@ -88,6 +104,32 @@ export default function AboutPage() {
         </div>
         <Timeline />
       </Section>
+
+      {/* Office/Workshop visual */}
+      <section className="relative bg-bg-primary overflow-hidden">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border-medium">
+              <Image
+                src="/images/about/office-team.jpg"
+                alt="Zenith Digital HK team collaboration"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border-medium">
+              <Image
+                src="/images/about/workshop.jpg"
+                alt="AI training workshop"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ------------------------------------------------------------------ */}
       {/* Conference Presence                                                */}

@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/layout/PageHero";
 import { Section } from "@/components/ui/Section";
 import { createMetadata } from "@/lib/utils/metadata";
+import Image from "next/image";
 
 export const metadata = createMetadata({
   title: "Blog",
@@ -23,6 +24,7 @@ const BLOG_POSTS = [
     category: "Strategy",
     readTime: "8 min read",
     date: "Coming Soon",
+    image: "/images/blog/ai-pilots.jpg",
   },
   {
     title: "Building Agentic Workflows: Lessons from 3 Production Systems",
@@ -31,6 +33,7 @@ const BLOG_POSTS = [
     category: "Engineering",
     readTime: "12 min read",
     date: "Coming Soon",
+    image: "/images/blog/agentic-workflows.jpg",
   },
   {
     title: "LLM Cost Optimization: How We Cut Inference Costs by 60%",
@@ -39,6 +42,7 @@ const BLOG_POSTS = [
     category: "Technical",
     readTime: "10 min read",
     date: "Coming Soon",
+    image: "/images/blog/llm-costs.jpg",
   },
   {
     title: "APAC AI Compliance: Navigating PDPA, GDPR, and China's PIPL",
@@ -47,6 +51,7 @@ const BLOG_POSTS = [
     category: "Compliance",
     readTime: "15 min read",
     date: "Coming Soon",
+    image: "/images/blog/apac-compliance.jpg",
   },
 ] as const;
 
@@ -87,6 +92,17 @@ export default function BlogPage() {
             >
               {/* Gradient border on hover */}
               <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100 border-gradient" />
+
+              {/* Cover image */}
+              <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl mb-5 bg-bg-secondary">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
 
               {/* Top row — category + read time */}
               <div className="mb-4 flex items-center gap-3">

@@ -5,6 +5,7 @@ import { Section } from "@/components/ui/Section";
 import { SERVICES_DETAIL } from "@/lib/constants/services";
 import { createMetadata } from "@/lib/utils/metadata";
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata = createMetadata({
   title: "Services",
@@ -39,9 +40,15 @@ export default function ServicesPage() {
                 {service.number}
               </span>
 
-              {/* Icon placeholder — accent circle */}
-              <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent-primary/10">
-                <div className="h-5 w-5 rounded-full bg-accent-primary/60" />
+              {/* Service thumbnail */}
+              <div className="mb-5 relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-bg-secondary">
+                <Image
+                  src={`/images/services/${service.slug}-thumb.jpg`}
+                  alt={service.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
               </div>
 
               {/* Title */}

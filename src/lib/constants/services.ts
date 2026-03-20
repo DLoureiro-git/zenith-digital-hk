@@ -61,6 +61,11 @@ export const SERVICES_DETAIL: ServiceDetail[] = [
         description:
           "Present findings and recommendations to leadership with clear ROI projections and decision frameworks.",
       },
+      {
+        title: "Continuous Optimisation",
+        description:
+          "Ongoing quarterly reviews and roadmap adjustments based on market evolution, implementation learnings, and emerging AI capabilities.",
+      },
     ],
     deliverables: [
       "AI Readiness Assessment Report",
@@ -144,6 +149,11 @@ export const SERVICES_DETAIL: ServiceDetail[] = [
         description:
           "Production deployment with full observability dashboards, alerting, and ongoing performance optimisation.",
       },
+      {
+        title: "Continuous Learning",
+        description:
+          "Agent performance review, model updates, and workflow optimisation based on production data and evolving business requirements.",
+      },
     ],
     deliverables: [
       "Agent Architecture Documentation",
@@ -151,6 +161,7 @@ export const SERVICES_DETAIL: ServiceDetail[] = [
       "Observability & Monitoring Dashboard",
       "Guardrail & Safety Framework",
       "Operations Runbook",
+      "Integration Test Suite",
     ],
     faq: [
       {
@@ -215,6 +226,16 @@ export const SERVICES_DETAIL: ServiceDetail[] = [
         title: "Evaluation & Tuning",
         description:
           "Systematic evaluation against ground-truth datasets, with iterative tuning of retrieval parameters, prompts, and model configuration.",
+      },
+      {
+        title: "Pilot Deployment",
+        description:
+          "Deploy to a controlled user group with monitoring, gather feedback, and measure accuracy against benchmarks.",
+      },
+      {
+        title: "Production Scaling",
+        description:
+          "Full production rollout with auto-scaling, monitoring, and continuous retrieval quality improvement.",
       },
     ],
     deliverables: [
@@ -289,6 +310,16 @@ export const SERVICES_DETAIL: ServiceDetail[] = [
         description:
           "Go live with supervised autonomy, gradually increasing agent independence as confidence and performance benchmarks are met.",
       },
+      {
+        title: "Data Integration",
+        description:
+          "Connect your existing marketing data sources, CRM, and analytics platforms to establish baseline metrics.",
+      },
+      {
+        title: "Continuous Optimisation",
+        description:
+          "Ongoing AI model refinement, A/B testing automation, and performance reporting with actionable insights.",
+      },
     ],
     deliverables: [
       "Marketing AI Platform (custom or AdPilot deployment)",
@@ -296,6 +327,7 @@ export const SERVICES_DETAIL: ServiceDetail[] = [
       "Content Generation Pipeline",
       "Performance Analytics Dashboard",
       "Marketing Team Training Programme",
+      "ROI & Attribution Framework",
     ],
     faq: [
       {
@@ -371,6 +403,11 @@ export const SERVICES_DETAIL: ServiceDetail[] = [
         description:
           "Post-programme office hours, resource library access, and quarterly refresher sessions to maintain momentum.",
       },
+      {
+        title: "Impact Measurement",
+        description:
+          "Track AI adoption metrics, productivity gains, and capability development across trained teams with quarterly reports.",
+      },
     ],
     deliverables: [
       "Custom Training Curriculum",
@@ -378,6 +415,7 @@ export const SERVICES_DETAIL: ServiceDetail[] = [
       "Hands-On Project Templates",
       "Participant Assessment Reports",
       "AI Resource Library Access",
+      "AI Adoption Playbook",
     ],
     faq: [
       {
@@ -442,6 +480,16 @@ export const SERVICES_DETAIL: ServiceDetail[] = [
         title: "Training & Rollout",
         description:
           "Train your teams on governance procedures, establish review boards, and operationalise the framework across the organisation.",
+      },
+      {
+        title: "Monitoring & Alerting",
+        description:
+          "Deploy continuous monitoring for model drift, bias detection, and compliance violations with automated alerting.",
+      },
+      {
+        title: "Continuous Review",
+        description:
+          "Quarterly governance reviews, regulatory landscape updates, and framework evolution as your AI portfolio grows.",
       },
     ],
     deliverables: [

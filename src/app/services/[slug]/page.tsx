@@ -87,12 +87,6 @@ export default async function ServiceDetailPage({
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
-            {/* Fallback overlay in case image is missing */}
-            <div className="absolute inset-0 flex items-center justify-center bg-bg-secondary/80">
-              <span className="font-body text-sm text-text-tertiary">
-                {service.title}
-              </span>
-            </div>
           </div>
         </div>
       </Section>
