@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   FOOTER_SERVICES,
   FOOTER_PRODUCTS,
@@ -126,13 +127,13 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Col 1 — Brand */}
           <div>
-            <a href="#" className="group flex items-baseline gap-1.5 select-none">
-              <span className="font-display italic text-xl text-text-primary transition-all group-hover:text-glow">
-                ZENITH
-              </span>
-              <span className="font-body text-accent-primary uppercase tracking-[0.2em] text-[10px]">
-                DIGITAL HK
-              </span>
+            <a href="#" className="group select-none">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/logo-matched.png"
+                alt="Zenith Digital HK"
+                className="h-16 w-auto transition-opacity group-hover:opacity-80"
+              />
             </a>
 
             <p className="mt-3 text-sm font-body text-text-tertiary">

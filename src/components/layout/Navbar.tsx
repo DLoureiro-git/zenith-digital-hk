@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { NAV_LINKS } from "@/lib/constants";
 
@@ -39,13 +40,13 @@ export function Navbar() {
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         {/* ---- Brand ---- */}
-        <a href="#" className="group flex items-baseline gap-1.5 select-none">
-          <span className="font-display italic text-lg text-text-primary transition-all group-hover:text-glow">
-            ZENITH
-          </span>
-          <span className="font-body text-accent-primary uppercase tracking-[0.2em] text-[10px]">
-            DIGITAL HK
-          </span>
+        <a href="#" className="group select-none">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo-matched.png"
+            alt="Zenith Digital HK"
+            className="h-14 w-auto transition-opacity group-hover:opacity-80"
+          />
         </a>
 
         {/* ---- Desktop links ---- */}
