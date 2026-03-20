@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { WHY_ZENITH_POINTS, STATS } from "@/lib/constants";
 import type { Stat } from "@/lib/constants";
+import Image from "next/image";
 
 // ---------------------------------------------------------------------------
 // useCountUp — animates from 0 to target when element enters viewport
@@ -184,6 +185,21 @@ export function WhyZenith() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ delay: 0.2 }}
         >
+          {/* HK Skyline image */}
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-border-medium mb-6">
+            <Image
+              src="/images/about/hk-skyline.jpg"
+              alt="Hong Kong skyline at night"
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 40vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#050a18]/70 to-transparent" />
+            <div className="absolute bottom-4 left-4">
+              <span className="font-body text-xs text-text-secondary">Hong Kong · Our Home Base</span>
+            </div>
+          </div>
+
           <div className="grid grid-cols-2 gap-4">
             {STATS.map((stat) => (
               <StatBlock key={stat.label} stat={stat} />

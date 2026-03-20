@@ -79,6 +79,7 @@ export interface Product {
   metrics: ProductMetric[];
   accentColor: string;
   status: "Live" | "Beta" | "Coming Soon";
+  image: string;
 }
 
 export const PRODUCTS: Product[] = [
@@ -94,6 +95,7 @@ export const PRODUCTS: Product[] = [
     ],
     accentColor: "#3B82F6",
     status: "Live",
+    image: "/images/portfolio/adpilot.jpg",
   },
   {
     tag: "AI Sales",
@@ -107,6 +109,7 @@ export const PRODUCTS: Product[] = [
     ],
     accentColor: "#06B6D4",
     status: "Beta",
+    image: "/images/portfolio/marco.jpg",
   },
   {
     tag: "Premium Automotive",
@@ -120,6 +123,7 @@ export const PRODUCTS: Product[] = [
     ],
     accentColor: "#8B5CF6",
     status: "Live",
+    image: "/images/portfolio/theselection.jpg",
   },
 ];
 

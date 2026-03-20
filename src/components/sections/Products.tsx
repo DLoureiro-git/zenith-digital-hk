@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { PRODUCTS } from "@/lib/constants";
 import Link from "next/link";
+import Image from "next/image";
 
 // ---------------------------------------------------------------------------
 // Animation variants
@@ -100,8 +101,25 @@ export function Products() {
                 }}
               />
 
+              {/* Product preview image */}
+              <div className="relative aspect-[16/9] w-full overflow-hidden">
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                />
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: `linear-gradient(to top, var(--color-bg-card) 0%, transparent 60%)`,
+                  }}
+                />
+              </div>
+
               {/* Content */}
-              <div className="relative p-8">
+              <div className="relative p-8 pt-0">
                 {/* Tag + Status */}
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] uppercase tracking-wider text-text-tertiary font-body">
