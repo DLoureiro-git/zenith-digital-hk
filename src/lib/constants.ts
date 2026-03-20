@@ -14,6 +14,7 @@ export const SITE = {
 } as const;
 
 export interface Service {
+  slug: string;
   number: string;
   icon: string;
   title: string;
@@ -22,36 +23,42 @@ export interface Service {
 
 export const SERVICES: Service[] = [
   {
+    slug: "ai-strategy",
     number: "01",
     icon: "brain-circuit",
     title: "AI Strategy & Roadmapping",
     body: "From executive vision to technical architecture — we design AI adoption programmes that create compounding advantage, not one-off pilots.",
   },
   {
+    slug: "agentic-systems",
     number: "02",
     icon: "workflow",
     title: "Agentic System Design",
     body: "We build multi-agent pipelines that automate complex commercial workflows, reducing operational overhead and accelerating throughput.",
   },
   {
+    slug: "llm-integration",
     number: "03",
     icon: "database-zap",
     title: "LLM Integration & Fine-Tuning",
     body: "Custom model deployment, RAG architecture, and domain fine-tuning — AI that knows your business, not just the internet.",
   },
   {
+    slug: "marketing-intelligence",
     number: "04",
     icon: "bar-chart-3",
     title: "AI-Powered Marketing Intelligence",
     body: "We transform marketing operations with autonomous campaign management, predictive analytics, and content at scale.",
   },
   {
+    slug: "enterprise-training",
     number: "05",
     icon: "users-round",
     title: "Enterprise AI Training",
     body: "Practical, hands-on programmes that build AI fluency across your teams — from C-suite to operations.",
   },
   {
+    slug: "ai-governance",
     number: "06",
     icon: "shield-check",
     title: "AI Governance & Compliance",
@@ -158,9 +165,10 @@ export const STATS: Stat[] = [
 ];
 
 export const NAV_LINKS = [
-  { href: "#services", label: "Services" },
-  { href: "#products", label: "Products" },
-  { href: "#about", label: "About" },
+  { href: "/services", label: "Services" },
+  { href: "/portfolio", label: "Portfolio" },
+  { href: "/about", label: "About" },
+  { href: "/blog", label: "Blog" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -171,11 +179,12 @@ export interface FooterLink {
 }
 
 export const FOOTER_SERVICES: FooterLink[] = [
-  { label: "AI Strategy", href: "#services" },
-  { label: "Agentic Systems", href: "#services" },
-  { label: "LLM Integration", href: "#services" },
-  { label: "AI Marketing", href: "#services" },
-  { label: "Training", href: "#services" },
+  { label: "AI Strategy", href: "/services/ai-strategy" },
+  { label: "Agentic Systems", href: "/services/agentic-systems" },
+  { label: "LLM Integration", href: "/services/llm-integration" },
+  { label: "AI Marketing", href: "/services/marketing-intelligence" },
+  { label: "Training", href: "/services/enterprise-training" },
+  { label: "AI Governance", href: "/services/ai-governance" },
 ];
 
 export const FOOTER_PRODUCTS: FooterLink[] = [
@@ -185,8 +194,9 @@ export const FOOTER_PRODUCTS: FooterLink[] = [
 ];
 
 export const FOOTER_COMPANY: FooterLink[] = [
-  { label: "About", href: "#about" },
-  { label: "Blog", href: "#", badge: "Soon" },
+  { label: "About", href: "/about" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Blog", href: "/blog", badge: "Soon" },
   { label: "Contact", href: "#contact" },
   { label: "Privacy Policy", href: "#" },
 ];

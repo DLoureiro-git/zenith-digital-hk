@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { NAV_LINKS } from "@/lib/constants";
 
@@ -12,6 +14,13 @@ import { NAV_LINKS } from "@/lib/constants";
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  const isActive = (href: string) => {
+    if (href.startsWith("#")) return false;
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
 
   const handleScroll = useCallback(() => {
     setScrolled(window.scrollY > 50);
@@ -40,27 +49,39 @@ export function Navbar() {
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         {/* ---- Brand ---- */}
-        <a href="#" className="group select-none">
+        <Link href="/" className="group select-none">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/logo-matched.png"
             alt="Zenith Digital HK"
             className="h-14 w-auto transition-opacity group-hover:opacity-80"
           />
-        </a>
+        </Link>
 
         {/* ---- Desktop links ---- */}
         <ul className="hidden md:flex items-center gap-8">
-          {NAV_LINKS.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className="relative text-sm font-body font-medium text-text-secondary hover:text-text-primary transition-colors duration-300 after:absolute after:bottom-[-4px] after:left-0 after:h-px after:w-0 after:bg-accent-primary after:transition-all after:duration-300 hover:after:w-full"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const active = isActive(link.href);
+            const className = `relative text-sm font-body font-medium transition-colors duration-300 ${
+              active
+                ? "text-text-primary after:absolute after:bottom-[-4px] after:left-0 after:h-px after:w-full after:bg-accent-primary"
+                : "text-text-secondary hover:text-text-primary after:absolute after:bottom-[-4px] after:left-0 after:h-px after:w-0 after:bg-accent-primary after:transition-all after:duration-300 hover:after:w-full"
+            }`;
+
+            return (
+              <li key={link.href}>
+                {link.href.startsWith("/") ? (
+                  <Link href={link.href} className={className}>
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a href={link.href} className={className}>
+                    {link.label}
+                  </a>
+                )}
+              </li>
+            );
+          })}
         </ul>
 
         {/* ---- Desktop CTA — pill shape with glow ---- */}
@@ -112,17 +133,34 @@ export function Navbar() {
             className="overflow-hidden md:hidden border-t border-border-medium bg-[rgba(5,10,24,0.95)] backdrop-blur-2xl"
           >
             <ul className="flex flex-col gap-4 px-6 py-6">
-              {NAV_LINKS.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="text-sm font-body font-medium text-text-secondary hover:text-text-primary transition"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+              {NAV_LINKS.map((link) => {
+                const active = isActive(link.href);
+                const className = `text-sm font-body font-medium transition ${
+                  active ? "text-text-primary" : "text-text-secondary hover:text-text-primary"
+                }`;
+
+                return (
+                  <li key={link.href}>
+                    {link.href.startsWith("/") ? (
+                      <Link
+                        href={link.href}
+                        onClick={() => setMobileOpen(false)}
+                        className={className}
+                      >
+                        {link.label}
+                      </Link>
+                    ) : (
+                      <a
+                        href={link.href}
+                        onClick={() => setMobileOpen(false)}
+                        className={className}
+                      >
+                        {link.label}
+                      </a>
+                    )}
+                  </li>
+                );
+              })}
               <li>
                 <a
                   href="#contact"

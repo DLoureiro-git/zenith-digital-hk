@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { SERVICES } from "@/lib/constants";
 import type { Service } from "@/lib/constants";
 
@@ -148,30 +149,40 @@ export function Services() {
           viewport={{ once: true, margin: "-60px" }}
         >
           {SERVICES.map((service) => (
-            <motion.div
-              key={service.number}
-              variants={cardVariants}
-              className="group relative rounded-2xl border border-border-medium bg-bg-card p-8 backdrop-blur-sm transition-all duration-500 hover:border-border-glow hover:shadow-[0_0_40px_rgba(59,130,246,0.08)] hover:-translate-y-1"
-            >
-              {/* Gradient border on hover */}
-              <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100 border-gradient" />
+            <motion.div key={service.number} variants={cardVariants}>
+              <Link
+                href={`/services/${service.slug}`}
+                className="group relative block rounded-2xl border border-border-medium bg-bg-card p-8 backdrop-blur-sm transition-all duration-500 hover:border-border-glow hover:shadow-[0_0_40px_rgba(59,130,246,0.08)] hover:-translate-y-1"
+              >
+                {/* Gradient border on hover */}
+                <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100 border-gradient" />
 
-              {/* Number */}
-              <span className="mb-4 block font-body text-[11px] font-semibold tracking-widest text-accent-primary/60">
-                {service.number}
-              </span>
+                {/* Number */}
+                <span className="mb-4 block font-body text-[11px] font-semibold tracking-widest text-accent-primary/60">
+                  {service.number}
+                </span>
 
-              {/* Icon with glow background */}
-              <div className="mb-5 inline-flex items-center justify-center rounded-xl bg-accent-primary/5 p-3">
-                <ServiceIcon icon={service.icon} />
-              </div>
+                {/* Icon with glow background */}
+                <div className="mb-5 inline-flex items-center justify-center rounded-xl bg-accent-primary/5 p-3">
+                  <ServiceIcon icon={service.icon} />
+                </div>
 
-              <h3 className="mb-3 font-body text-xl font-semibold text-text-primary">
-                {service.title}
-              </h3>
-              <p className="font-body text-sm leading-relaxed text-text-secondary">
-                {service.body}
-              </p>
+                <h3 className="mb-3 font-body text-xl font-semibold text-text-primary">
+                  {service.title}
+                </h3>
+                <p className="mb-4 font-body text-sm leading-relaxed text-text-secondary">
+                  {service.body}
+                </p>
+
+                {/* Learn more indicator */}
+                <span className="inline-flex items-center gap-1 text-sm font-body text-accent-primary/60 group-hover:text-accent-primary transition-colors">
+                  Learn more
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
+                  </svg>
+                </span>
+              </Link>
             </motion.div>
           ))}
         </motion.div>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import {
   FOOTER_SERVICES,
   FOOTER_PRODUCTS,
@@ -18,27 +19,38 @@ function FooterColumn({
   heading: string;
   links: FooterLink[];
 }) {
+  const linkClassName =
+    "text-sm font-body text-text-secondary hover:text-accent-primary transition-colors duration-300 inline-flex items-center gap-2";
+
   return (
     <div>
       <h4 className="font-body text-[11px] uppercase tracking-widest text-text-primary mb-5">
         {heading}
       </h4>
       <ul className="space-y-3">
-        {links.map((link) => (
-          <li key={link.label}>
-            <a
-              href={link.href}
-              className="text-sm font-body text-text-secondary hover:text-accent-primary transition-colors duration-300 inline-flex items-center gap-2"
-            >
-              {link.label}
-              {link.badge && (
-                <span className="text-[9px] uppercase tracking-wider border border-border-medium text-text-tertiary rounded-full px-2 py-0.5 leading-none">
-                  {link.badge}
-                </span>
+        {links.map((link) => {
+          const badge = link.badge && (
+            <span className="text-[9px] uppercase tracking-wider border border-border-medium text-text-tertiary rounded-full px-2 py-0.5 leading-none">
+              {link.badge}
+            </span>
+          );
+
+          return (
+            <li key={link.label}>
+              {link.href.startsWith("/") ? (
+                <Link href={link.href} className={linkClassName}>
+                  {link.label}
+                  {badge}
+                </Link>
+              ) : (
+                <a href={link.href} className={linkClassName}>
+                  {link.label}
+                  {badge}
+                </a>
               )}
-            </a>
-          </li>
-        ))}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
@@ -127,14 +139,14 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Col 1 — Brand */}
           <div>
-            <a href="#" className="group select-none">
+            <Link href="/" className="group select-none">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/logo-matched.png"
                 alt="Zenith Digital HK"
                 className="h-16 w-auto transition-opacity group-hover:opacity-80"
               />
-            </a>
+            </Link>
 
             <p className="mt-3 text-sm font-body text-text-tertiary">
               {SITE.tagline}
